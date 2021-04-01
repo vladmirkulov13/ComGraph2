@@ -1,12 +1,16 @@
-import numpy as np
 
 
 class Parser:
+    # у объекта создается три поля:
+    # point - массив точек
+    # polygons - массив полигонов
+    # vertex_list_z -
     def __init__(self):
         self.points = []
         self.polygons = []
         self.vertex_list_z = []
 
+# считываем координаты вершин из файла
     def load_points(self, fileName, z):
         objFile = open(fileName)
         for line in objFile:
@@ -22,6 +26,8 @@ class Parser:
                 self.points.append(cord)
         objFile.close()
 
+# считвание номеров вершин для полигонов из файла
+
     def load_polygons(self, fileName):
         objFile = open(fileName)
         for line in objFile:
@@ -35,17 +41,3 @@ class Parser:
 
         objFile.close()
 
-    # ----------------------------------------------------------------------------------------
-
-    # def parserOBJ(self):
-    #     with open('test.obj', 'r') as objFile:
-    #         for line in objFile:
-    #             split = line.split()
-    #             if split[0] == "v":
-    #                 self.points = np.append(self.points, [[float(split[1]), float(split[2]), float(split[3])]], axis=0)
-    #             if split[0] == "f":
-    #                 new_split1 = split[1].split('/')
-    #                 new_split2 = split[2].split('/')
-    #                 new_split3 = split[3].split('/')
-    #                 self.polyg = np.append(self.polyg, [[int(new_split1[0]), int(new_split2[0]), int(new_split3[0])]],
-    #                                        axis=0)

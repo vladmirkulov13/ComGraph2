@@ -82,12 +82,14 @@ def lineByBresenhem(start, finish, img):
                 y += 1
             error -= 1
 
+# создаем 4 изображения для отрисовки на них линий
 
 img1 = Image.new("L", (200, 200))
 img2 = Image.new("L", (200, 200))
 img3 = Image.new("L", (200, 200))
 img4 = Image.new("RGB", (200, 200))
 
+# отрисовка линий согласно алгоритму из методички
 for i in range(13):
     line1(100, 100, 100 + int(math.cos(i * 2 * math.pi / 13) * 95),
           100 + int(math.sin(i * 2 * math.pi / 13) * 95), img1, 255)
