@@ -13,6 +13,7 @@ point_list = []
 # проходим по массиву points и масштабируя координаты
 # добавляем их в point_list
 # добавляем на изображение
+# задание 5
 for pair in parser.points:
     x = int(-10000 * pair[0] + 500)
     y = int(-10000 * pair[1] + 1000)
@@ -25,6 +26,7 @@ parser.load_polygons("Test.obj")
 # проходим по массиву polygons
 # рисуем линии по алг. Брезенхема
 # соединяя точки, указанные в элементе массива polygons
+# задание 7
 for polygon in parser.polygons:
     lineByBresenhem(point_list[polygon[0] - 1], point_list[polygon[1] - 1], img)
     lineByBresenhem(point_list[polygon[1] - 1], point_list[polygon[2] - 1], img)

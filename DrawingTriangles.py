@@ -3,9 +3,10 @@ import numpy as np
 from PIL import Image, ImageDraw
 from Parser import Parser
 
-size = 6000
+size = 1000
 
 
+# задание 8
 # вычисление барицентрических координат
 def bar_coord(x0, y0, x1, y1, x2, y2, x, y):
     lambda0 = ((x1 - x2) * (y - y2) - (y1 - y2) * (x - x2)) / ((x1 - x2) * (y0 - y2) - (y1 - y2) * (x0 - x2))
@@ -14,7 +15,8 @@ def bar_coord(x0, y0, x1, y1, x2, y2, x, y):
     return lambda0, lambda1, lambda2
 
 
-def draw_triangles(x0, y0, x1, y1, x2, y2, image, color, size):
+# задание 9
+def draw_triangles(x0, y0, x1, y1, x2, y2, image, color):
     draw = ImageDraw.Draw(image)
     # определяем минимальные и максимальные значения огранич. прямоугольника
     xmin = math.floor(np.min([x0, x1, x2]))
@@ -32,9 +34,10 @@ def draw_triangles(x0, y0, x1, y1, x2, y2, image, color, size):
         for y in range(ymin, ymax):
             lambda0, lambda1, lambda2 = bar_coord(x0, y0, x1, y1, x2, y2, x, y)
             if lambda0 > 0 and lambda1 > 0 and lambda2 > 0:
-                draw.point((x, size - y), color)
+                draw.point((x, y), color)
 
 
+# задание 11
 def draw_polygons(image):
     parser = Parser()
     parser.load_points("Test.obj", False)
@@ -46,12 +49,12 @@ def draw_polygons(image):
         for point in polygon:
             # достаем x, y по номеру точки, указанном в полигоне
             x, y = parser.points[point - 1]
-            triangle.append((28000 * x + 2500, 28000 * y + 1500))
+            triangle.append(((-10000 * x + 500), (-10000 * y + 1000)))
         # соединяем точки треугольника, используя рандомный цвет
         draw_triangles(triangle[0][0], triangle[0][1], triangle[1][0], triangle[1][1], triangle[2][0], triangle[2][1],
-                       image, (np.random.randint(256), np.random.randint(256), np.random.randint(256)), size)
+            image, (np.random.randint(256), np.random.randint(256), np.random.randint(256)))
     image.save("images/RabbitByColoredTriangles.jpg")
 
 
-image = Image.new('RGB', (6000, 6000))
+image = Image.new('RGB', (1000, 1000))
 draw_polygons(image)

@@ -4,6 +4,7 @@ import numpy as np
 from PIL import Image, ImageDraw
 
 
+# задание номер 3
 # алгоритмы отрисовки прямых из лекций:
 # первый алгоритм:
 def line1(x0, y0, x1, y1, img, color):
@@ -21,7 +22,7 @@ def line2(x0, y0, x1, y1, img, color):
     x = x0
     t = 0
     while x <= x1:
-        if x1 - x0 != 0:
+        if x1 - x0!=0:
             t = (x - x0) / (float)(x1 - x0)
         y = y0 * (1. - t) + y1 * t
         x += 1
@@ -41,7 +42,7 @@ def line3(x0, y0, x1, y1, img, color):
     x = x0
     t = 0
     while x <= x1:
-        if x1 - x0 != 0:
+        if x1 - x0!=0:
             t = (x - x0) / (float)(x1 - x0)
         y = y0 * (1. - t) + y1 * t
         if steep:
@@ -63,7 +64,7 @@ def lineByBresenhem(start, finish, img):
         start, finish = finish, start
     dx = -start[0] + finish[0]
     dy = -start[1] + finish[1]
-    if dx == 0:
+    if dx==0:
         derror = 0
     else:
         derror = abs(dy / dx)
@@ -82,6 +83,7 @@ def lineByBresenhem(start, finish, img):
                 y += 1
             error -= 1
 
+
 # создаем 4 изображения для отрисовки на них линий
 
 img1 = Image.new("L", (200, 200))
@@ -92,14 +94,14 @@ img4 = Image.new("RGB", (200, 200))
 # отрисовка линий согласно алгоритму из методички
 for i in range(13):
     line1(100, 100, 100 + int(math.cos(i * 2 * math.pi / 13) * 95),
-          100 + int(math.sin(i * 2 * math.pi / 13) * 95), img1, 255)
+                    100 + int(math.sin(i * 2 * math.pi / 13) * 95), img1, 255)
     line2(100, 100, 100 + int(math.cos(i * 2 * math.pi / 13) * 95),
-          100 + int(math.sin(i * 2 * math.pi / 13) * 95), img2, 255)
+                    100 + int(math.sin(i * 2 * math.pi / 13) * 95), img2, 255)
     line3(100, 100, 100 + int(math.cos(i * 2 * math.pi / 13) * 95),
-          100 + int(math.sin(i * 2 * math.pi / 13) * 95), img3, 255)
+                    100 + int(math.sin(i * 2 * math.pi / 13) * 95), img3, 255)
     lineByBresenhem((100, 100),
-                    (int(100 + 95 * np.sin(2 * np.pi * i / 13)), int(100 + 95 * np.cos(2 * np.pi * i / 13))),
-                    img4)
+        (int(100 + 95 * np.sin(2 * np.pi * i / 13)), int(100 + 95 * np.cos(2 * np.pi * i / 13))),
+        img4)
 
 img1.save("images/Star1.jpg")
 img2.save("images/Star2.jpg")
